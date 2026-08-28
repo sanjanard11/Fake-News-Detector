@@ -1,14 +1,6 @@
-<<<<<<< HEAD
 Flask
 pandas
 scikit-learn
 numpy
 joblib
 gunicorn
-=======
-Flask
-pandas
-scikit-learn
-numpy
-joblib
->>>>>>> 1c511a1ace01bc293ef95f7f8bc458d7f20e7b97
