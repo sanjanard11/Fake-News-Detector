@@ -1,117 +1,189 @@
 # 📰 Fake News Detector
 
-A professional **Machine Learning-based Fake News Detection web application** built using **Python, Flask, Natural Language Processing (NLP), and Scikit-learn**.
+A modern Machine Learning-based Fake News Detection System developed using Python, Flask, Scikit-learn, Natural Language Processing (NLP), and SQLite. The application helps users analyze news content and predict whether it is likely **REAL** or **FAKE**.
 
-The application analyzes news articles or statements and predicts whether the content is likely **REAL** or **FAKE**. It also provides a confidence score, prediction history, dashboard analytics, and insights into the machine learning model.
-
----
-
-## 🚀 Live Demo
-
-🌐 **Live Application:**  
-https://fake-news-detector-0ims.onrender.com
+The system uses TF-IDF vectorization and a Logistic Regression model to process textual news content, calculate prediction confidence, maintain prediction history, and provide dashboard analytics.
 
 ---
 
-## ✨ Features
+## 🌐 Live Demo
 
-- 🤖 AI-powered news analysis
-- 📰 Detects whether news content is **REAL** or **FAKE**
-- 🎯 Displays prediction confidence percentage
-- 🧠 Uses **Natural Language Processing (NLP)**
-- 📊 Interactive dashboard statistics
-- 📈 Tracks total predictions
-- ✅ Shows reliable news predictions
-- ⚠️ Shows potentially fake news predictions
-- 🎯 Calculates average confidence
-- 🕒 Stores recent prediction history
-- 🗑️ Delete individual predictions
-- 🧹 Clear complete prediction history
-- 📄 Displays analyzed text length
-- 💡 Provides AI analysis insights
-- 🎨 Modern and responsive user interface
+**Live Website:**  
+https://fake-news-detector-0ims.onrender.com/
+
+**GitHub Repository:**  
+https://github.com/sanjanard11/Fake-News-Detector
 
 ---
 
-## 🛠️ Technologies Used
+# 📌 About This Project
 
-### Frontend
-- HTML5
-- CSS3
-- Jinja2 Templates
+### Machine Learning and Web Development Project
 
-### Backend
-- Python
-- Flask
+The Fake News Detector is designed to simplify the process of analyzing news articles and statements using Machine Learning and Natural Language Processing.
 
-### Machine Learning
-- Scikit-learn
-- Logistic Regression
-- TF-IDF Vectorization
-- Natural Language Processing (NLP)
+The application enables users to:
 
-### Data Processing
-- Pandas
-- NumPy
+* Analyze news articles and statements
+* Predict whether content is REAL or FAKE
+* View prediction confidence
+* Track previous predictions
+* Monitor dashboard statistics
+* Delete individual prediction records
+* Clear prediction history
+* Understand the AI analysis workflow
 
-### Database
-- SQLite
+### 📦 Deliverable
 
-### Deployment
-- Render
-- Gunicorn
+A live Machine Learning web application with source code hosted on GitHub.
+
+**Developer:** SANJANA RD  
+**Project Type:** Machine Learning and Web Application
 
 ---
 
-## 🧠 Machine Learning Workflow
+# 🎯 Project Objectives
 
-The Fake News Detector follows these steps:
-
-### 1️⃣ Enter News Content
-The user enters or pastes a news article or statement into the application.
-
-### 2️⃣ Text Processing
-The news content is processed using Natural Language Processing techniques.
-
-### 3️⃣ TF-IDF Vectorization
-The text is converted into numerical features using **TF-IDF (Term Frequency–Inverse Document Frequency)**.
-
-### 4️⃣ Machine Learning Prediction
-A trained **Logistic Regression model** analyzes the processed text.
-
-### 5️⃣ Result Generation
-The system predicts whether the news is:
-
-- ✅ **REAL**
-- ⚠️ **FAKE**
-
-### 6️⃣ Confidence Analysis
-The application displays the confidence percentage of the prediction.
+* Detect potentially fake news content
+* Apply Machine Learning for text classification
+* Use NLP for text processing
+* Provide prediction confidence
+* Maintain prediction history
+* Provide dashboard analytics
+* Create a user-friendly interface
+* Develop a responsive and modern web application
 
 ---
+
+# ✨ Features
+
+## 🎨 Frontend Features
+
+* Modern Responsive UI
+* AI-Powered News Analysis Interface
+* News Content Input Panel
+* Prediction Result Dashboard
+* Confidence Progress Bar
+* Dashboard Statistics
+* Prediction History
+* Delete Prediction Option
+* Clear History Option
+* Responsive Design
+* User-Friendly Interface
+
+## 🔧 Backend Features
+
+* Flask Web Server
+* Machine Learning Model Integration
+* SQLite Database Integration
+* Prediction History Management
+* Confidence Calculation
+* Error Handling
+* Model Loading Using Joblib
+
+---
+
+# 📋 Core Functionalities
+
+## 📰 News Analysis
+
+* Enter News Content
+* Analyze News Articles
+* Analyze News Statements
+* Process Text Using NLP
+* Generate Machine Learning Predictions
+
+## 🤖 Fake News Prediction
+
+* Predict REAL News
+* Predict FAKE News
+* Calculate Prediction Confidence
+* Display Confidence Level
+* Provide AI Analysis Insights
 
 ## 📊 Dashboard Analytics
 
-The application provides a dashboard containing:
+* Total Predictions Count
+* Reliable News Overview
+* Potentially Fake News Overview
+* Average Confidence Score
+* Prediction Activity Monitoring
 
-- 📊 Total Predictions
-- ✅ Reliable News Count
-- ⚠️ Potentially Fake News Count
-- 🎯 Average Prediction Confidence
+## 📜 Prediction History
 
-These statistics help users understand their overall news analysis activity.
+* Store Previous Predictions
+* View Recent Predictions
+* Display Prediction Result
+* Display Confidence Percentage
+* Display Confidence Level
+* Display Prediction Date and Time
+* Delete Individual Predictions
+* Clear Complete History
 
 ---
 
-## 📁 Project Structure
+# 🛠 Technologies Used
 
-FakeNewsDetector/
+## Frontend
+
+* HTML5
+* CSS3
+* Jinja2 Templates
+
+## Backend
+
+* Python
+* Flask
+
+## Machine Learning
+
+* Scikit-learn
+* Logistic Regression
+* TF-IDF Vectorizer
+* Natural Language Processing (NLP)
+
+## Database
+
+* SQLite
+
+## Data Processing
+
+* Pandas
+* NumPy
+
+## Additional Packages
+
+* Joblib
+* Gunicorn
+
+---
+
+# 🧠 Machine Learning Workflow
+
+```text
+News Input
+    ↓
+Text Processing
+    ↓
+TF-IDF Vectorization
+    ↓
+Logistic Regression Model
+    ↓
+Prediction
+    ↓
+Confidence Calculation
+    ↓
+Store Result in SQLite Database
+
+Fake-News-Detector/
 │
 ├── app.py
 ├── train_model.py
 ├── requirements.txt
 ├── Procfile
 ├── database.db
+├── README.md
+├── LICENSE
 │
 ├── dataset/
 │   └── news.csv
@@ -126,71 +198,34 @@ FakeNewsDetector/
 └── templates/
     └── index.html
 
-🎯 Model Used
+🌐 Deployment
 
-The application uses:
+The application is deployed using:
 
-Logistic Regression
-
-Logistic Regression is used as the classification algorithm to predict whether a news article is likely REAL or FAKE.
-
-TF-IDF Vectorizer
-
-TF-IDF converts textual news content into numerical features that can be processed by the machine learning model.
-
-
-📸 Application Features
-
-The web application includes:
-
-Professional AI-powered landing interface
-News content input section
-AI model status indicator
-Prediction result dashboard
-Confidence progress bar
-Model information
-NLP processing details
-Text length analysis
-Prediction history
-Dashboard statistics
-Important fact-checking disclaimer
-
+Render
+Gunicorn
 
 ⚠️ Disclaimer
 
-This application provides a machine-learning-based prediction and should not be considered a definitive fact-checking system.
+This application provides a Machine Learning-based prediction and should not be considered a definitive fact-checking service.
 
-Users should always verify important information using trusted and reliable sources.
+The predictions are generated based on patterns learned from the training dataset. Users should always verify important information using trusted and reliable sources.
 
-🔮 Future Improvements
-Integration with real-time news APIs
-Advanced deep learning models
-BERT-based text classification
-User authentication system
-Cloud database integration
-News source credibility analysis
-Visualization and analytics improvements
-REST API support
-Multi-language news analysis
+📄 License
 
+This project is licensed under the MIT License.
 
-👩‍💻 Author
+👩‍💻 Developer
 
-**Sanjana RD**
+**SANJANA RD**
 
-**Computer Science Engineering Student**
+Computer Science Engineering Student
 
-**Skills** : 
-Python
-Machine Learning
-HTML
-CSS
-Flask
-NLP
-Scikit-learn
-SQL
-
+GitHub:
+https://github.com/sanjanard11
 
 ⭐ Support
 
-If you found this project useful, please consider giving the repository a star ⭐.
+If you found this project useful, consider giving it a ⭐ on GitHub.
+
+Happy Coding! 🚀
