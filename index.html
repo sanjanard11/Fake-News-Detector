@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Fake News Detector | AI Analysis</title>
+
+    <link rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- ========================= -->
+        <!-- HERO HEADER -->
+        <!-- ========================= -->
+
+        <header class="hero">
+
+            <div class="hero-badge">
+                🤖 AI POWERED NEWS ANALYSIS
+            </div>
+
+            <h1>📰 Fake News Detector</h1>
+
+            <p>
+                Analyze article content using Machine Learning,
+                Natural Language Processing, and TF-IDF technology.
+            </p>
+
+            <div class="hero-tech">
+                <span>Python</span>
+                <span>Machine Learning</span>
+                <span>NLP</span>
+                <span>Scikit-learn</span>
+            </div>
+
+        </header>
+
+
+        <!-- ========================= -->
+        <!-- DASHBOARD STATISTICS -->
+        <!-- ========================= -->
+
+        <section class="stats-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-tag">AI ANALYTICS</span>
+                    <h2>Dashboard Overview</h2>
+                    <p>Summary of your news prediction activity.</p>
+                </div>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+                <!-- TOTAL PREDICTIONS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon total-icon">
+                        📊
+                    </div>
+
+                    <div>
+                        <span>Total Predictions</span>
+
+                        <h3>
+                            {{ total_predictions }}
+                        </h3>
+
+                        <small>All analyses</small>
+                    </div>
+
+                </div>
+
+
+                <!-- RELIABLE NEWS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon real-icon">
+                        ✓
+                    </div>
+
+                    <div>
+                        <span>Reliable News</span>
+
+                        <h3>
+                            {{ total_real }}
+                        </h3>
+
+                        <small>Predicted as REAL</small>
+                    </div>
+
+                </div>
+
+
+                <!-- FAKE NEWS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon fake-icon">
+                        !
+                    </div>
+
+                    <div>
+                        <span>Potentially Fake</span>
+
+                        <h3>
+                            {{ total_fake }}
+                        </h3>
+
+                        <small>Predicted as FAKE</small>
+                    </div>
+
+                </div>
+
+
+                <!-- AVERAGE CONFIDENCE -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon confidence-icon">
+                        🎯
+                    </div>
+
+                    <div>
+                        <span>Average Confidence</span>
+
+                        <h3>
+                            {{ "%.1f"|format(average_confidence) }}%
+                        </h3>
+
+                        <small>Across all predictions</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- ANALYSIS PANEL -->
+        <!-- ========================= -->
+
+        <main class="detector-card">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="section-tag">INPUT</span>
+
+                    <h2>Analyze News Content</h2>
+
+                    <p>
+                        Paste a news article or statement below.
+                    </p>
+                </div>
+
+
+                <div class="ai-status">
+
+                    <span class="status-dot"></span>
+
+                    AI Model Ready
+
+                </div>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <form method="POST">
+
+                <label for="news_text">
+                    News or Article Text
+                </label>
+
+
+                <textarea
+                    id="news_text"
+                    name="news_text"
+                    placeholder="Paste or type the news content you want to analyze..."
+                    required>{{ news_text }}</textarea>
+
+
+                <div class="action-buttons">
+
+                    <button type="submit" class="analyze-btn">
+
+                        <span>🔍</span>
+
+                        Analyze Content
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="clear-btn"
+                        onclick="document.getElementById('news_text').value=''">
+
+                        Clear
+
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <!-- ERROR MESSAGE -->
+
+            {% if error %}
+
+            <div class="error-message">
+
+                <span>⚠️</span>
+
+                <div>
+
+                    <strong>Unable to Analyze</strong>
+
+                    <p>{{ error }}</p>
+
+                </div>
+
+            </div>
+
+            {% endif %}
+
+
+            <!-- ========================= -->
+            <!-- RESULT DASHBOARD -->
+            <!-- ========================= -->
+
+            {% if prediction %}
+
+            <section class="result-dashboard">
+
+
+                <!-- RESULT HEADER -->
+
+                <div class="dashboard-top">
+
+                    <div class="prediction-title">
+
+
+                        {% if prediction == "FAKE" %}
+
+                        <div class="prediction-icon fake-icon">
+                            !
+                        </div>
+
+
+                        <div>
+
+                            <span class="section-tag">
+                                MODEL RESULT
+                            </span>
+
+                            <h2>
+                                Potentially Fake News
+                            </h2>
+
+                            <p>
+                                The model detected patterns associated
+                                with misleading content.
+                            </p>
+
+                        </div>
+
+
+                        {% else %}
+
+
+                        <div class="prediction-icon real-icon">
+                            ✓
+                        </div>
+
+
+                        <div>
+
+                            <span class="section-tag">
+                                MODEL RESULT
+                            </span>
+
+                            <h2>
+                                Likely Reliable News
+                            </h2>
+
+                            <p>
+                                The model detected patterns associated
+                                with reliable content.
+                            </p>
+
+                        </div>
+
+
+                        {% endif %}
+
+
+                    </div>
+
+
+                    <div class="result-badge {{ prediction|lower }}">
+
+                        {{ prediction }}
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONFIDENCE -->
+
+                <div class="confidence-value">
+
+                    <strong>
+                        {{ "%.2f"|format(confidence) }}%
+                    </strong>
+
+                    <span class="confidence-level {{ confidence_level|lower }}">
+
+                        {{ confidence_level }} Confidence
+
+                    </span>
+
+                </div>
+
+
+                <!-- PROGRESS BAR -->
+
+                <div class="progress-track">
+
+                    <div
+                        class="progress-bar {{ prediction|lower }}"
+                        style="width: {{ confidence }}%">
+
+                    </div>
+
+                </div>
+
+
+                <div class="progress-labels">
+
+                    <span>Low Confidence</span>
+
+                    <span>High Confidence</span>
+
+                </div>
+
+
+                <!-- ANALYSIS DETAILS -->
+
+                <div class="analysis-grid">
+
+
+                    <div class="analysis-card">
+
+                        <div class="analysis-icon">
+                            🤖
+                        </div>
+
+                        <div>
+
+                            <span>MODEL</span>
+
+                            <h4>
+                                Logistic Regression
+                            </h4>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="analysis-card">
+
+                        <div class="analysis-icon">
+                            🧠
+                        </div>
+
+                        <div>
+
+                            <span>PROCESSING</span>
+
+                            <h4>
+                                TF-IDF + NLP
+                            </h4>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="analysis-card">
+
+                        <div class="analysis-icon">
+                            📄
+                        </div>
+
+                        <div>
+
+                            <span>TEXT LENGTH</span>
+
+                            <h4>
+                                {{ news_text|length }} Characters
+                            </h4>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- MODEL INSIGHT -->
+
+                <div class="model-insight">
+
+                    <div class="insight-icon">
+                        💡
+                    </div>
+
+
+                    <div>
+
+                        <h4>
+                            AI Analysis Insight
+                        </h4>
+
+
+                        {% if prediction == "FAKE" %}
+
+                        <p>
+
+                            The model identified language patterns that are
+                            similar to potentially misleading content from
+                            its training data.
+
+                        </p>
+
+
+                        {% else %}
+
+                        <p>
+
+                            The model identified language patterns that are
+                            more consistent with relatively reliable content
+                            from its training data.
+
+                        </p>
+
+                        {% endif %}
+
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+            {% endif %}
+
+        </main>
+
+
+        <!-- ========================= -->
+        <!-- PREDICTION HISTORY -->
+        <!-- ========================= -->
+
+        <section class="history-section">
+
+
+            <div class="history-header">
+
+                <div>
+
+                    <span class="section-tag">
+                        RECENT ACTIVITY
+                    </span>
+
+                    <h2>
+                        Prediction History
+                    </h2>
+
+                    <p>
+                        Your latest news analysis results.
+                    </p>
+
+                </div>
+
+
+                {% if history %}
+
+                <form
+                    action="{{ url_for('clear_history') }}"
+                    method="POST">
+
+                    <button
+                        type="submit"
+                        class="clear-history-btn">
+
+                        Clear History
+
+                    </button>
+
+                </form>
+
+                {% endif %}
+
+
+            </div>
+
+
+            {% if history %}
+
+
+            <div class="history-list">
+
+
+                {% for item in history %}
+
+
+                <div class="history-item">
+
+
+                    <div class="history-main">
+
+
+                        <div
+                            class="history-result {{ item.prediction|lower }}">
+
+
+                            {% if item.prediction == "REAL" %}
+
+                            ✓
+
+                            {% else %}
+
+                            !
+
+                            {% endif %}
+
+
+                        </div>
+
+
+                        <div class="history-content">
+
+
+                            <p class="history-text">
+
+                                {{ item.news_text[:120] }}
+
+                                {% if item.news_text|length > 120 %}
+
+                                ...
+
+                                {% endif %}
+
+                            </p>
+
+
+                            <div class="history-meta">
+
+
+                                <span
+                                    class="history-prediction {{ item.prediction|lower }}">
+
+                                    {{ item.prediction }}
+
+                                </span>
+
+
+                                <span>
+
+                                    {{ "%.2f"|format(item.confidence) }}%
+
+                                </span>
+
+
+                                <span>
+
+                                    {{ item.confidence_level }} Confidence
+
+                                </span>
+
+
+                                <span>
+
+                                    {{ item.created_at }}
+
+                                </span>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <!-- DELETE -->
+
+                    <form
+                        action="{{ url_for('delete_history', history_id=item.id) }}"
+                        method="POST">
+
+
+                        <button
+                            type="submit"
+                            class="delete-history-btn"
+                            title="Delete prediction">
+
+                            🗑
+
+                        </button>
+
+
+                    </form>
+
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- EMPTY HISTORY -->
+
+            <div class="empty-history">
+
+                <div class="empty-icon">
+                    📊
+                </div>
+
+                <h3>
+                    No Predictions Yet
+                </h3>
+
+                <p>
+
+                    Analyze some news content and your recent
+                    predictions will appear here.
+
+                </p>
+
+            </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- HOW IT WORKS -->
+        <!-- ========================= -->
+
+        <section class="workflow">
+
+            <div class="workflow-heading">
+
+                <span class="section-tag">
+                    HOW IT WORKS
+                </span>
+
+                <h2>
+                    From Text to Prediction
+                </h2>
+
+            </div>
+
+
+            <div class="workflow-grid">
+
+
+                <div class="workflow-step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Enter Content
+                    </h3>
+
+                    <p>
+                        Provide news text or an article for analysis.
+                    </p>
+
+                </div>
+
+
+                <div class="workflow-step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <h3>
+                        Process Text
+                    </h3>
+
+                    <p>
+                        NLP and TF-IDF convert text into numerical features.
+                    </p>
+
+                </div>
+
+
+                <div class="workflow-step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <h3>
+                        AI Prediction
+                    </h3>
+
+                    <p>
+                        The trained model analyzes patterns
+                        and predicts the result.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- DISCLAIMER -->
+        <!-- ========================= -->
+
+        <section class="disclaimer">
+
+            <div class="disclaimer-icon">
+                ⚠️
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Important Disclaimer
+                </h3>
+
+                <p>
+
+                    This system provides a machine-learning-based prediction
+                    and is not a definitive fact-checking service.
+                    Always verify important information using trusted sources.
+
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- FOOTER -->
+        <!-- ========================= -->
+
+        <footer>
+
+            <p>
+                Fake News Detector • Built with Python,
+                Flask & Machine Learning
+            </p>
+
+        </footer>
+
+
+    </div>
+
+</body>
+
+</html>
