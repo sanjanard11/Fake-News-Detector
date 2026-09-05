@@ -9,7 +9,7 @@ The system uses TF-IDF vectorization and a Logistic Regression model to process 
 ## 🌐 Live Demo
 
 **Live Website:**  
-https://fake-news-detector-0ims.onrender.com/
+https://fake-news-detector-ruddy-three.vercel.app/
 
 **GitHub Repository:**  
 https://github.com/sanjanard11/Fake-News-Detector
